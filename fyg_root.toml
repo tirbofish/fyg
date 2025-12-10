@@ -1,0 +1,6 @@
+# example project when a project is a workspace
+[workspace]
+members = ["java-core", "kotlin-api", "mixed-impl"]
+
+[workspace.dependencies]
+"org.junit.jupiter:junit-jupiter" = "5.10.0"

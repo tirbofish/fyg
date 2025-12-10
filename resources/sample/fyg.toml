@@ -1,0 +1,6 @@
+# minimal example
+[project]
+group = "{{ namespace }}"
+name = "{{ projectName }}"
+version = "1.0.0-SNAPSHOT"
+type = "{{ type }}"

@@ -1,0 +1,50 @@
+# sample fyg.toml file
+[project]
+name = "dropbear"
+group = "com.dropbear"
+version = "1.0.0-SNAPSHOT" # maven versioning and semver works. Will translate accordingly
+authors = ["4tkbytes@pm.me <tk>", "foobar@foobar.com <foobaz>"]
+description = "An example test project that might or might not work"
+
+[build]
+multiplatform = true # optional
+languages = ["kotlin", "java"]
+
+[targets] # required if KMP is enabled
+jvm = { enabled = true, target = "17" }
+
+ios-arm64.enabled = true
+ios-x64.enabled = true
+ios-simulator-arm64.enabled = true
+
+linux-x64.enabled = true
+macos-arm64.enabled = false
+windows-x64.enabled = false
+
+[targets.native.binary]
+type = "executable"
+base-name = "mytool"
+
+[dependencies.common] # otherwise its [dependencies] if no KMP
+"org.jetbrains.kotlinx:kotlinx-cli" = "0.3.6"
+"org.jetbrains.kotlinx:kotlinx-coroutines-core" = "1.10.2"
+java-core = { path = "../java-core" }
+kotlin-api = { path = "../kotlin-api" }
+
+[dependencies.jvm]
+"ch.qos.logback:logback-classic" = "1.4.11"
+
+[dependencies.test]
+"org.jetbrains.kotlin:kotlin-test-junit5" = "2.2.21"
+"org.junit.jupiter:junit-jupiter" = { workspace = true }
+"io.mockk:mockk" = "1.13.8"
+
+[test]
+framework = "junit"
+
+[repositories]
+# maven-central is always enabled unless disabled manually
+maven-central = false
+maven-local = true # false by default
+"other-repository" = { type = "fyg", url = "https://foobar.com/fyg/repo/v2"}
+"separate-maven-repository" = { type = "maven", url = "https://foobar.com/maven/repo/v2"}
